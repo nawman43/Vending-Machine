@@ -39,26 +39,18 @@ namespace Capstone.Classes
         }
 
 
-        private string totalChange;
 
-        public string TotalChange
+        public decimal TotalChange
         {
-            get { return totalChange; }
+            get { return (dimes * 10) + (nickels * 5) + (quarters * 25); }
             
         }
 
-        
-
-    //    public Change(decimal amountOfDollars)
-    //    {
-            
-    //    }
-
+       
 
         public Change(decimal changeInCents)
         {
 
-            totalChange = (changeInCents / 100).ToString("C");
 
             while(changeInCents / quarterValue >= 1)
             {

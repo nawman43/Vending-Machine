@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Capstone.Classes
 {
-    class CandyItem : VendingMachineItem
+    public class CandyItem : VendingMachineItem
     {
 
        public CandyItem(string itemName , decimal priceCents)
