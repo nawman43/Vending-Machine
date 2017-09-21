@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace Capstone.Classes
 {
-    class VendingMachine
+   public class VendingMachine
 
         
     {
        Dictionary<string, List<VendingMachineItem>> Inventory = new Dictionary<string , List<VendingMachineItem>>();
-        
+
+        public Change customersChange;
 
 
         private decimal curerntBalance;
@@ -37,26 +38,32 @@ namespace Capstone.Classes
             curerntBalance += 100 * dollars;
         }
 
-        public string GetItemAtSlot(string slotId)
+        public Change returnChange()
         {
-
-            List<VendingMachineItem> items = Inventory[slotId];
-            VendingMachineItem typeOfItem = items[0];
-
-            if(Inventory[slotId].Count > 0 && typeOfItem.Price <= CurrentBalance)
-            {
-                Inventory[slotId] = Inventory[slotId].RemoveAt(0);
-                return typeOfItem.Name;
-            }
-            else if (Inventory[slotId].Count == 0 && typeOfItem.Price <= CurrentBalance)
-            {
-                return typeOfItem.Name + " is out of stock";
-            }
-            else
-            {
-                return "You do not have enough money!";
-            }
+            Change customersChange = new Change(curerntBalance);
+            return customersChange;
         }
+
+        //public string GetItemAtSlot(string slotId)
+        //{
+
+        //    List<VendingMachineItem> items = Inventory[slotId];
+        //    VendingMachineItem typeOfItem = items[0];
+
+        //    if (Inventory[slotId].Count > 0 && typeOfItem.Price <= CurrentBalance)
+        //    {
+        //        Inventory[slotId] = Inventory[slotId].RemoveAt(0);
+        //        return typeOfItem.Name;
+        //    }
+        //    else if (Inventory[slotId].Count == 0 && typeOfItem.Price <= CurrentBalance)
+        //    {
+        //        return typeOfItem.Name + " is out of stock";
+        //    }
+        //    else
+        //    {
+        //        return "You do not have enough money!";
+        //    }
+       // }
 
 
     }
