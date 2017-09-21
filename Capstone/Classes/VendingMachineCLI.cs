@@ -8,5 +8,7 @@ namespace Capstone.Classes
 {
     class VendingMachineCLI
     {
+
+
     }
 }

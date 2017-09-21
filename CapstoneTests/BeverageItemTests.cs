@@ -10,6 +10,7 @@ namespace CapstoneTests
         [TestMethod]
         public void BeverageNameAndPriceAreRight()
         {
+            VendingMachine ourVM = new VendingMachine();
             BeverageItem MtDew = new BeverageItem("MtDew", 100);
             Assert.AreEqual(100, MtDew.Price);
             Assert.AreEqual("MtDew", MtDew.Name);

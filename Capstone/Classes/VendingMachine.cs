@@ -51,7 +51,7 @@ namespace Capstone.Classes
         {
             InventoryFileDAL IFD = new InventoryFileDAL();
             Inventory =  IFD.GetDictionary();
-
+          
         }
 
         public VendingMachine(Dictionary<string, List<VendingMachineItem>> Inventory )
@@ -63,6 +63,14 @@ namespace Capstone.Classes
 
         public VendingMachineItem GetItemAtSlot(string slotId)
         {
+            List<VendingMachineItem> ourSlotDevice = new List<VendingMachineItem>();
+            ourSlotDevice = Inventory[slotId];
+            string price = ourSlotDevice[0].Price.ToString();
+            string name = ourSlotDevice[0].Name;
+            string[] nameArray = new string[] { name, price };
+            this.slots = nameArray;
+
+
 
             List<VendingMachineItem> itemWantedList = new List<VendingMachineItem>();
             itemWantedList = Inventory[slotId];
@@ -70,6 +78,7 @@ namespace Capstone.Classes
             if (itemWantedList[0].Price <= curerntBalance && itemWantedList.Count > 0)
             {
                 itemWantedList.RemoveAt(0);
+                curerntBalance -= itemWantedList[0].Price;
                 return itemWantedList[0];
             }
 
