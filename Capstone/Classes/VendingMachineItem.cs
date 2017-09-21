@@ -1,0 +1,34 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Capstone.Classes
+{
+   public abstract class VendingMachineItem
+    {
+        private string name;
+
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+
+
+        private decimal price;
+
+        public decimal Price
+        {
+            get { return price; }
+            set { price = value; }
+        }
+
+
+
+        public abstract string Consume();
+        
+
+    }
+}
