@@ -4,47 +4,61 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Capstone.Classes;
+using Capstone.Exception_Classes;
 
 namespace Capstone.Classes
 {
-    
+
     public class VendingMachineCLI
     {
         public VendingMachine ourVM = new VendingMachine();
         public void Display()
         {
-            
+
             PrintHeader();
 
-            while(true)
+            while (true)
             {
                 Console.WriteLine();
                 Console.WriteLine("Main Menu");
                 Console.WriteLine("(1) Display Vending Machine Items");
                 Console.WriteLine("(2) Purchase");
                 string input = Console.ReadLine();
+                Console.WriteLine();
 
                 if (input == "1")
                 {
                     Submenu1CLI submenu = new Submenu1CLI();
                     submenu.Display();
                 }
-                else if(input == "2")
+                else if (input == "2")
                 {
                     Submenu2CLI submenu = new Submenu2CLI(ourVM);
                     submenu.Display();
                 }
-                
-                
-                
+
+
+
             }
         }
 
         public class Submenu1CLI
         {
+
+
             public void Display()
             {
-              
+                Dictionary<string, List<VendingMachineItem>> Inventory = new Dictionary<string, List<VendingMachineItem>>();
+                InventoryFileDAL IFD = new InventoryFileDAL();
+                Inventory = IFD.GetDictionary();
+
+
+                foreach(var kvp in Inventory)
+                {
+                    
+                    Console.WriteLine((kvp.Key) + " " + (kvp.Value[0].Name) + " " + (kvp.Value[0].Price.ToString("C")));
+                   
+                }
             }
         }
 
@@ -52,6 +66,8 @@ namespace Capstone.Classes
         {
             List<VendingMachineItem> totalProductsSelected = new List<VendingMachineItem>();
             private VendingMachine VM;
+            Change change;
+
             public Submenu2CLI(VendingMachine VM)
             {
                 this.VM = VM;
@@ -77,21 +93,31 @@ namespace Capstone.Classes
                     else if (input == "2")
                     {
 
-                       Console.WriteLine("Please select your product.");
-                        string slotId = Console.ReadLine();
+                        Console.WriteLine("Please select your product.");
+                        Console.WriteLine();
+                        string slotId = Console.ReadLine().ToUpper();
                         VendingMachineItem productSelected = VM.GetItemAtSlot(slotId);
 
-                        if (productSelected != null)
+
+                        if (productSelected != null) // <--- This might work now
                         {
 
                             totalProductsSelected.Add(productSelected);
                         }
-                        else if(productSelected == null)
-                            Console.WriteLine("Sorry, Item is out of stock");
+                        //else if (productSelected == null) 
+                        //    Console.WriteLine("Sorry, you do not have enough money or item is out of stock!");
                     }
                     else if (input == "3")
                     {
+                        change = VM.returnChange();
+                        Console.WriteLine("Your change is:");
+                        Console.WriteLine(change.Quarters + " in quarters, " + change.Dimes + " in dimes, " + change.Nickels + " in nickels");
+                        Console.WriteLine();
 
+                        for (int i = 0; i < totalProductsSelected.Count; i++)
+                        {
+                            Console.WriteLine(totalProductsSelected[i].Consume());
+                        }
 
                         break;
                     }
@@ -109,7 +135,7 @@ namespace Capstone.Classes
 
         private void PrintHeader()
         {
-            Console.WriteLine("WELCOME!");
+            Console.WriteLine("WELCOME!";
         }
     }
 }

@@ -12,7 +12,7 @@ namespace CapstoneTests
         {
             VendingMachine Carl = new VendingMachine();
             Carl.FeedMoney(5);
-            Assert.AreEqual(500,Carl.CurrentBalance);
+            Assert.AreEqual(5,Carl.CurrentBalance);
         }
     }
 }

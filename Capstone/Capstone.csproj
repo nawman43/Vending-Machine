@@ -51,6 +51,10 @@
     <Compile Include="Classes\InventoryFileDAL.cs" />
     <Compile Include="Classes\VendingMachine.cs" />
     <Compile Include="Classes\VendingMachineCLI.cs" />
+    <Compile Include="Exception Classes\InsuffiecientFundsException.cs" />
+    <Compile Include="Exception Classes\InvalidSlotIdException.cs" />
+    <Compile Include="Exception Classes\OutOfStockException.cs" />
+    <Compile Include="Exception Classes\VendingMachineExceptions.cs" />
     <Compile Include="Classes\VendingMachineItem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
