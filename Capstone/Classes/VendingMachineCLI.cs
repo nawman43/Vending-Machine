@@ -12,6 +12,7 @@ namespace Capstone.Classes
     public class VendingMachineCLI
     {
         public VendingMachine ourVM = new VendingMachine();
+        
         public void Display()
         {
 
@@ -67,6 +68,7 @@ namespace Capstone.Classes
             List<VendingMachineItem> totalProductsSelected = new List<VendingMachineItem>();
             private VendingMachine VM;
             Change change;
+            TransactionFileLog logger = new TransactionFileLog();
 
             public Submenu2CLI(VendingMachine VM)
             {
@@ -86,10 +88,9 @@ namespace Capstone.Classes
                     if (input == "1")
                     {
                         Console.WriteLine("How many dollars would you like to insert?");
-                        int fedMoney = Int32.Parse(Console.ReadLine());
-                        VM.FeedMoney(fedMoney);
-
-                    }
+                        int fedMoney = Int32.Parse(Console.ReadLine());                       
+                        logger.RecordDeposit(fedMoney, (VM.CurrentBalance + fedMoney));
+                        VM.FeedMoney(fedMoney);                    }
                     else if (input == "2")
                     {
 
@@ -97,15 +98,15 @@ namespace Capstone.Classes
                         Console.WriteLine();
                         string slotId = Console.ReadLine().ToUpper();
                         VendingMachineItem productSelected = VM.GetItemAtSlot(slotId);
+                        
+                        logger.RecordPurchase(productSelected.Name , slotId, VM.CurrentBalance, VM.CurrentBalance - productSelected.Price);
 
-
-                        if (productSelected != null) // <--- This might work now
+                        if (productSelected != null) 
                         {
 
                             totalProductsSelected.Add(productSelected);
                         }
-                        //else if (productSelected == null) 
-                        //    Console.WriteLine("Sorry, you do not have enough money or item is out of stock!");
+                       
                     }
                     else if (input == "3")
                     {
@@ -113,7 +114,7 @@ namespace Capstone.Classes
                         Console.WriteLine("Your change is:");
                         Console.WriteLine(change.Quarters + " in quarters, " + change.Dimes + " in dimes, " + change.Nickels + " in nickels");
                         Console.WriteLine();
-
+                        logger.RecordCompleteTransaction(change.TotalChange, VM.CurrentBalance);
                         for (int i = 0; i < totalProductsSelected.Count; i++)
                         {
                             Console.WriteLine(totalProductsSelected[i].Consume());
@@ -135,7 +136,7 @@ namespace Capstone.Classes
 
         private void PrintHeader()
         {
-            Console.WriteLine("WELCOME!";
+            Console.WriteLine("WELCOME!");
         }
     }
 }
