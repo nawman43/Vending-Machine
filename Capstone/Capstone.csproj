@@ -49,6 +49,7 @@
     <Compile Include="Classes\ChipItem.cs" />
     <Compile Include="Classes\GumItem.cs" />
     <Compile Include="Classes\InventoryFileDAL.cs" />
+    <Compile Include="Classes\Tools.cs" />
     <Compile Include="Classes\TransactionFileLog.cs" />
     <Compile Include="Classes\VendingMachine.cs" />
     <Compile Include="Classes\VendingMachineCLI.cs" />

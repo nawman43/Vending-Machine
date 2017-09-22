@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Capstone.Classes;
 using Capstone.Exception_Classes;
 
+
 namespace Capstone.Classes
 {
     public class VendingMachine
@@ -26,9 +27,7 @@ namespace Capstone.Classes
             get { return curerntBalance; }
 
         }
-
-
-
+        
 
         public string[] Slots
         {
@@ -44,7 +43,7 @@ namespace Capstone.Classes
         public Change returnChange()
         {
             this.curerntBalance = CurrentBalance * 100;
-            //customersChange = Change(this.curerntBalance);
+           
             decimal amountToReturn = this.curerntBalance;
             this.curerntBalance = 0;
             return new Change(amountToReturn);
@@ -61,9 +60,7 @@ namespace Capstone.Classes
         {
 
         }
-
-
-
+        
         public VendingMachineItem GetItemAtSlot(string slotId)
         {
             List<VendingMachineItem> itemWantedList = new List<VendingMachineItem>();
@@ -90,7 +87,7 @@ namespace Capstone.Classes
                 {
                     VendingMachineItem item = itemWantedList[0];
 
-                    //    if(itemWantedList != itemWantedList.Count)
+                 
                     curerntBalance -= itemWantedList[0].Price;
                     itemWantedList.RemoveAt(0);
 
@@ -115,56 +112,30 @@ namespace Capstone.Classes
                 {
                     InvalidSlotIdException x = new InvalidSlotIdException("This slot does not exist", ex);
                     {
-                        Console.WriteLine("This slot does not exist");
+                        Console.Beep();
+                        Tools.ColorfulWriteLine("This slot does not exist" , ConsoleColor.Red);
                     }
                 }
 
                else if (itemWantedList.Count == 0)
                 {
+                    Console.Beep();
                     OutOfStockException x = new OutOfStockException("This item is out of stock", ex);
-                    Console.WriteLine("This item is out of stock");
+                    Tools.ColorfulWriteLine("This item is out of stock" , ConsoleColor.Red);
                 }
 
                 else if (itemWantedList[0].Price > curerntBalance)
                 {
+                    Console.Beep();
                     InsuffiecientFundsException x = new InsuffiecientFundsException("You do not have enough money", ex);
-                    Console.WriteLine("You do not have enough money");
+                    Tools.ColorfulWriteLine("You do not have enough money" , ConsoleColor.Red);
                 }
                 
 
                 return null;
             }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            //List<VendingMachineItem> items = Inventory[slotId];
-            //VendingMachineItem typeOfItem = items[0];
-
-            //if (Inventory[slotId].Count > 0 && typeOfItem.Price <= CurrentBalance)
-            //{
-            //    Inventory[slotId] = Inventory[slotId].RemoveAt(0);
-            //    return typeOfItem.Name;
-            //}
-            //else if (Inventory[slotId].Count == 0 && typeOfItem.Price <= CurrentBalance)
-            //{
-            //    return typeOfItem.Name + " is out of stock";
-            //}
-            //else
-            //{
-            //    return "You do not have enough money!";
-            //}
+            
         }
 
 

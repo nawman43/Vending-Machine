@@ -12,7 +12,7 @@ namespace Capstone.Classes
     public class VendingMachineCLI
     {
         public VendingMachine ourVM = new VendingMachine();
-        
+
         public void Display()
         {
 
@@ -54,11 +54,11 @@ namespace Capstone.Classes
                 Inventory = IFD.GetDictionary();
 
 
-                foreach(var kvp in Inventory)
+                foreach (var kvp in Inventory)
                 {
-                    
+
                     Console.WriteLine((kvp.Key) + " " + (kvp.Value[0].Name) + " " + (kvp.Value[0].Price.ToString("C")));
-                   
+
                 }
             }
         }
@@ -87,10 +87,22 @@ namespace Capstone.Classes
 
                     if (input == "1")
                     {
-                        Console.WriteLine("How many dollars would you like to insert?");
-                        int fedMoney = Int32.Parse(Console.ReadLine());                       
-                        logger.RecordDeposit(fedMoney, (VM.CurrentBalance + fedMoney));
-                        VM.FeedMoney(fedMoney);                    }
+                        try
+                        {
+
+
+                            Console.WriteLine("How many dollars would you like to insert?");
+                            int fedMoney = Int32.Parse(Console.ReadLine());
+                            logger.RecordDeposit(fedMoney, (VM.CurrentBalance + fedMoney));
+                            VM.FeedMoney(fedMoney);
+                        }
+                        catch(FormatException)
+                        {
+                            Tools.ColorfulWriteLine("Please only enter a whole Dollar Value" , ConsoleColor.Red);
+                            Console.Beep();
+                        }
+
+                        }
                     else if (input == "2")
                     {
 
@@ -98,15 +110,16 @@ namespace Capstone.Classes
                         Console.WriteLine();
                         string slotId = Console.ReadLine().ToUpper();
                         VendingMachineItem productSelected = VM.GetItemAtSlot(slotId);
+
                         
-                        logger.RecordPurchase(productSelected.Name , slotId, VM.CurrentBalance, VM.CurrentBalance - productSelected.Price);
 
-                        if (productSelected != null) 
+                        if (productSelected != null)
                         {
-
+                            
                             totalProductsSelected.Add(productSelected);
+                            logger.RecordPurchase(productSelected.Name, slotId, VM.CurrentBalance, VM.CurrentBalance - productSelected.Price);
                         }
-                       
+
                     }
                     else if (input == "3")
                     {
@@ -136,7 +149,7 @@ namespace Capstone.Classes
 
         private void PrintHeader()
         {
-            Console.WriteLine("WELCOME!");
+            Tools.ColorfulWrite("WELCOME!",ConsoleColor.Yellow);
         }
     }
 }

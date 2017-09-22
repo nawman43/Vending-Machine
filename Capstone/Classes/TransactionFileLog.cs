@@ -26,7 +26,7 @@ namespace Capstone.Classes
 
             using (StreamWriter sw = new StreamWriter(fullPath, true))
             {
-                sw.WriteLine(DateTime.UtcNow + " Give Change " + (initialAmount /100).ToString("C") + " " +  finalAmount.ToString("C"));
+                sw.WriteLine((DateTime.UtcNow).ToString().PadRight(30) + " Give Change ".PadRight(30) + (initialAmount /100).ToString("C").PadRight(31) + " " +  finalAmount.ToString("C"));
             }
             
         }
@@ -41,7 +41,7 @@ namespace Capstone.Classes
 
             using (StreamWriter sw = new StreamWriter(fullPath, true))
             {
-                sw.WriteLine(DateTime.UtcNow + " FEED MONEY " + despositAmount.ToString("C") + "  " + finalBalcance.ToString("C")  );
+                sw.WriteLine(DateTime.UtcNow.ToString().PadRight(30) + " FEED MONEY ".PadRight(30) + despositAmount.ToString("C").PadRight(30) + "  " + finalBalcance.ToString("C")  );
             }
         }
 
@@ -55,7 +55,7 @@ namespace Capstone.Classes
 
             using (StreamWriter sw = new StreamWriter(fullPath, true))
             {
-                sw.WriteLine(DateTime.UtcNow  + productName + " " + slotID + " " + initialBalance.ToString("C") + "  " + finalBalance.ToString("C"));
+                sw.WriteLine(DateTime.UtcNow.ToString().PadRight(30)  + productName + " " + slotID.PadRight(20) + " " + initialBalance.ToString("C").PadRight(30) + "  " + finalBalance.ToString("C"));
             }
         }
     }
