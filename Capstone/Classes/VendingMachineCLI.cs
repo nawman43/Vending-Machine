@@ -79,13 +79,14 @@ namespace Capstone.Classes
 
                        Console.WriteLine("Please select your product.");
                         string slotId = Console.ReadLine();
-                        if (VM.GetItemAtSlot(slotId) != null)
+                        VendingMachineItem productSelected = VM.GetItemAtSlot(slotId);
+
+                        if (productSelected != null)
                         {
-                            VendingMachineItem productSelected = VM.GetItemAtSlot(slotId);
 
                             totalProductsSelected.Add(productSelected);
                         }
-                        else if(VM.GetItemAtSlot(slotId) == null)
+                        else if(productSelected == null)
                             Console.WriteLine("Sorry, Item is out of stock");
                     }
                     else if (input == "3")
