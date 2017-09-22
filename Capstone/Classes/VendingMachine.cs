@@ -36,11 +36,12 @@ namespace Capstone.Classes
 
         public void FeedMoney(int dollars)
         {
-            curerntBalance += 100 * dollars;
+            curerntBalance +=  dollars;
         }
 
         public Change returnChange()
         {
+            this.curerntBalance = CurrentBalance * 100;
             //customersChange = Change(this.curerntBalance);
             decimal amountToReturn = this.curerntBalance;
             this.curerntBalance = 0;
@@ -69,7 +70,6 @@ namespace Capstone.Classes
             string name = ourSlotDevice[0].Name;
             string[] nameArray = new string[] { name, price };
             this.slots = nameArray;
-
 
 
             List<VendingMachineItem> itemWantedList = new List<VendingMachineItem>();
