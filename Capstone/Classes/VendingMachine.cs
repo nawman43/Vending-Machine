@@ -112,7 +112,9 @@ namespace Capstone.Classes
                 {
                     InvalidSlotIdException x = new InvalidSlotIdException("This slot does not exist", ex);
                     {
-                        Console.Beep();
+                        Beepers annoy = new Beepers();
+                        annoy.BeepTetris();
+
                         Tools.ColorfulWriteLine("This slot does not exist" , ConsoleColor.Red);
                     }
                 }

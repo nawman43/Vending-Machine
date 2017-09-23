@@ -98,8 +98,10 @@ namespace Capstone.Classes
                         }
                         catch(FormatException)
                         {
+                            Beepers annoy = new Beepers();
                             Tools.ColorfulWriteLine("Please only enter a whole Dollar Value" , ConsoleColor.Red);
-                            Console.Beep();
+                            annoy.BeepMario();
+
                         }
 
                         }
