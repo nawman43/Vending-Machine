@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Capstone.Classes
 {
-   public abstract class VendingMachineItem
+    public abstract class VendingMachineItem
     {
         private string name;
 
@@ -16,7 +16,6 @@ namespace Capstone.Classes
             set { name = value; }
         }
 
-
         private decimal price;
 
         public decimal Price
@@ -24,11 +23,9 @@ namespace Capstone.Classes
             get { return price; }
             set { price = value; }
         }
-
-
-
-        public abstract string Consume();
         
+        public abstract string Consume();
+
 
     }
 }

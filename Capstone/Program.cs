@@ -11,24 +11,11 @@ namespace Capstone
     {
         static void Main(string[] args)
         {
-
-
+            
             VendingMachineCLI program = new VendingMachineCLI();
 
             program.Display();
-
-
-
-
-
-
-
-
-
-
-
-
-           
+                                 
         }
     }
 }

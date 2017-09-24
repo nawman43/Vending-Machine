@@ -21,9 +21,7 @@ namespace Capstone.Classes
             string path = "vendingmachine.csv";
             string fullFilePath = Path.Combine(currentDirectory, path);
 
-            
-
-
+                        
             try
             {
                 using (StreamReader sr = new StreamReader(fullFilePath))
@@ -87,7 +85,6 @@ namespace Capstone.Classes
                 Console.WriteLine(ex.Message);
             }
         }
-
-        
+                
     }
 }

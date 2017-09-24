@@ -14,8 +14,7 @@ namespace Capstone.Classes
             this.Name = itemName;
         }
 
-
-
+        
         public override string Consume()
         {
             return "Chew Chew, Yum!";

@@ -38,8 +38,6 @@ namespace Capstone.Classes
                     submenu.Display();
                 }
 
-
-
             }
         }
 
@@ -90,21 +88,21 @@ namespace Capstone.Classes
                         try
                         {
 
-
                             Console.WriteLine("How many dollars would you like to insert?");
                             int fedMoney = Int32.Parse(Console.ReadLine());
                             logger.RecordDeposit(fedMoney, (VM.CurrentBalance + fedMoney));
                             VM.FeedMoney(fedMoney);
+
+
                         }
-                        catch(FormatException)
+                        catch (FormatException)
                         {
-                            Beepers annoy = new Beepers();
-                            Tools.ColorfulWriteLine("Please only enter a whole Dollar Value" , ConsoleColor.Red);
-                            annoy.BeepMario();
+                            Console.Beep();
+                            Tools.ColorfulWriteLine("Please only enter a whole Dollar Value", ConsoleColor.Red);
 
                         }
 
-                        }
+                    }
                     else if (input == "2")
                     {
 
@@ -113,11 +111,10 @@ namespace Capstone.Classes
                         string slotId = Console.ReadLine().ToUpper();
                         VendingMachineItem productSelected = VM.GetItemAtSlot(slotId);
 
-                        
 
                         if (productSelected != null)
                         {
-                            
+
                             totalProductsSelected.Add(productSelected);
                             logger.RecordPurchase(productSelected.Name, slotId, VM.CurrentBalance, VM.CurrentBalance - productSelected.Price);
                         }
@@ -145,13 +142,13 @@ namespace Capstone.Classes
                     Console.WriteLine(VM.CurrentBalance.ToString("C"));
                 }
 
-
             }
         }
 
         private void PrintHeader()
         {
-            Tools.ColorfulWrite("WELCOME!",ConsoleColor.Yellow);
+            Tools.ColorfulWrite("WELCOME!", ConsoleColor.Yellow);
+            Console.WriteLine();
         }
     }
 }
